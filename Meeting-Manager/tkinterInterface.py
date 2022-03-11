@@ -3,11 +3,11 @@ from tkinter import filedialog
 
 from openpyxl import load_workbook
 from tkinter import *
+from Main import my_logic
 
 # globally declare wb and sheet variable
 
 # opening the existing excel file
-from Main import my_logic
 
 wb = load_workbook('data.xlsx')
 
@@ -26,7 +26,6 @@ def excel():
     sheet.column_dimensions['F'].width = 10
     sheet.column_dimensions['G'].width = 10
 
-
     # write given data to an excel spreadsheet
     # at particular location
     sheet.cell(row=1, column=1).value = "Meeting Title"
@@ -36,7 +35,6 @@ def excel():
     sheet.cell(row=1, column=5).value = "Meeting Minutes"
     sheet.cell(row=1, column=6).value = "Participant List"
     sheet.cell(row=1, column=7).value = "Follow-Up Meeting"
-
 
 
 # Function to set focus (cursor)
@@ -75,7 +73,6 @@ def focus6(event):
     followup_field.focus_set()
 
 
-
 # Function for clearing the
 # contents of text entry boxes
 def clear():
@@ -90,6 +87,7 @@ def clear():
     participants_field.deselect()
     followup_field.deselect()
 
+
 # Function to take data from GUI
 # window and write to an excel file
 def insert():
@@ -99,8 +97,8 @@ def insert():
             textfile.get() == "" and
             eid_field.get() == "" and
             email_field.get() == ""):
-            # minutes_field.get() == "" and
-            # participants_field.get() == ""):
+        # minutes_field.get() == "" and
+        # participants_field.get() == ""):
 
         print("empty input")
 
@@ -140,17 +138,18 @@ def openFile():
     global textfile
     filename = filedialog.askopenfilename(initialdir="/", title="Upload File",
                                           filetypes=(("Text files", "*.txt"), ("all files", "*.*")))
-    upload_label.configure(text = "Uploaded: " + filename)
-    file = open(filename,"r")
+    upload_label.configure(text="Uploaded: " + filename)
+    file = open(filename, "r")
     tf = file.read()
     textfile = tf
+
+
 
     file.close()
 
 
 # Driver code
 if __name__ == "__main__":
-
     # create a GUI window
     root = Tk()
 
@@ -189,7 +188,6 @@ if __name__ == "__main__":
     # create a Follow-Up Meeting Label
     followup = Label(root, text=" ", bg="lavender")
 
-
     # Upload Label
     upload_label = Label(root, text="Upload Pending", bg="lavender")
 
@@ -210,7 +208,7 @@ if __name__ == "__main__":
     minutes.grid(row=5, column=0)
     # saveButton.grid(row=7, column=0)
     participants.grid(row=6, column=0)
-    followup.grid(row = 7, column=0)
+    followup.grid(row=7, column=0)
     # saveButton.grid(row=7, column=1)
     upload_label.grid(row=14, column=1)
 
@@ -221,11 +219,11 @@ if __name__ == "__main__":
     eid_field = Entry(root)
     email_field = Entry(root)
     minutes_field = Checkbutton(root, text="Generate Meeting Minutes", variable=Checkbutton1, onvalue=1, offvalue=0,
-                               height=2, width=10)
+                                height=2, width=10)
     participants_field = Checkbutton(root, text="Generate Participant List", variable=Checkbutton2, onvalue=1,
-                                    offvalue=0, height=2, width=10)
-    followup_field = Checkbutton(root, text="Schedule Follow-Up Meeting", variable=Checkbutton3, onvalue=1,
                                      offvalue=0, height=2, width=10)
+    followup_field = Checkbutton(root, text="Schedule Follow-Up Meeting", variable=Checkbutton3, onvalue=1,
+                                 offvalue=0, height=2, width=10)
     # bind method of widget is used for
     # the binding the function with the events
 
@@ -253,7 +251,6 @@ if __name__ == "__main__":
     # then call the focus5 function
     followup_field.bind("<Return>", focus6)
 
-
     # grid method is used for placing
     # the widgets at respective positions
     # in table like structure.
@@ -265,8 +262,6 @@ if __name__ == "__main__":
     participants_field.grid(row=6, column=1, ipadx="100")
     followup_field.grid(row=7, column=1, ipadx="100")
 
-
-
     # call excel function
     excel()
 
@@ -277,6 +272,3 @@ if __name__ == "__main__":
 
     # start the GUI
     root.mainloop()
-
-
-
